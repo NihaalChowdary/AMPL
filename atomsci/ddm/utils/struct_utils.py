@@ -455,7 +455,7 @@ def fix_moe_smiles(smiles):
     """
     protn_pat = re.compile(r'\[([cCBnNPS])([-\+])(@*)(H[1234]*)*\]')
     scalar = False
-    if type(smiles) == str:
+    if type(smiles) is str:
         smiles = [smiles]
         scalar = True
     fixed = []
