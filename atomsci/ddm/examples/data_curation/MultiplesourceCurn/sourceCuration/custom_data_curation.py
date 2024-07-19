@@ -182,9 +182,9 @@ class DrugTargetCommonsActivityDump(AMPLDataset):
       targ_name='_'.join(targLst)
       if len(targ_name) >= 25 :
          targ_name='target'
-         fileNameTooLong=True
+         pass #fileNameTooLong=True
       else :
-         fileNameTooLong=False
+         pass#fileNameTooLong=False
       myList=self.df[self.id_col].unique().tolist()
       #
       #TODO: Need to make this caching scheme user defined
@@ -301,7 +301,7 @@ def convert_dtype(x):
         return 0.0
     try:
         return float(x)   
-    except:        
+    except (ValueError, TypeError):
         return 0.0
 
 class GPCRChEMBLActivityDump(AMPLDataset):
