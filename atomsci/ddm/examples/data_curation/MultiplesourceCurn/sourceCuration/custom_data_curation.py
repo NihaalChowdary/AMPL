@@ -301,7 +301,7 @@ def convert_dtype(x):
         return 0.0
     try:
         return float(x)   
-    except (ValueError, TypeError):
+    except Exception:
         return 0.0
 
 class GPCRChEMBLActivityDump(AMPLDataset):

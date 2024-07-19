@@ -37,7 +37,7 @@ class CustomConfigParser(configparser.ConfigParser) :
       except configparser.NoOptionError :
           try :
               rval = super().get(self.def_sec,keyval)
-          except :
+          except Exception:
               rval = None
       return rval;
 
@@ -214,7 +214,6 @@ class AMPLDataset:
         self.df['tmp_col1'] = self.df[self.base_smiles_col].apply(Chem.MolFromSmiles)
         mw_lst=[]
         for idx,row in self.df.iterrows() :
-            sml=row[self.base_smiles_col]
             mol=row['tmp_col1']
             mw = Descriptors.MolWt(mol)
             mw_lst.append(mw)
@@ -313,9 +312,8 @@ class CombineAMPLDataset:
         save_cols=[lead_ds.id_col, lead_ds.value_col, lead_ds.base_smiles_col , lead_ds.relation_col ]
         for it in range(1,len(ds_lst),1) :
             ds=ds_lst[it]
-            orig_cols=[ds.id_col, ds.value_col, ds.base_smiles_col , ds.relation_col ]
             rl_df=ds.df.rename( columns={ ds.id_col: lead_ds.id_col, ds.value_col : lead_ds.value_col, ds.base_smiles_col : lead_ds.base_smiles_col, ds.relation_col : lead_ds.relation_col, ds.smiles_col : lead_ds.smiles_col   }, inplace=False)
-            rl_df=rl_df[ save_cols ] 
+            rl_df=rl_df[ save_cols ]
             df_lst.append(rl_df)
         ## add lead dataframe to list
         rl_df=lead_ds.df[ save_cols ] 
