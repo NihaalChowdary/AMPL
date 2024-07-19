@@ -635,7 +635,7 @@ class MultitaskScaffoldSplitter(Splitter):
             population.append(split_chromosome)
 
         gene_alg = ga.GeneticAlgorithm(population, self.grade, ga_crossover,
-                        ga_mutate)
+                      ga_mutate)
         #gene_alg.iterate(num_generations)
         for i in range(self.num_generations):
             gene_alg.step(print_timings=print_timings)
